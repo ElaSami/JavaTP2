@@ -1,0 +1,278 @@
+// Importer les classes nécessaires
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// Classe représentant un animal du zoo
+class Animal {
+    // Propriétés de l'animal
+    // Propriété pour le badge du nourrisseur assigné
+    private int nourrisseurBadge;
+
+    // Getter et Setter pour la propriété nourrisseurBadge
+    public int getNourrisseurBadge() { return nourrisseurBadge; }
+    public void setNourrisseurBadge(int nourrisseurBadge) { this.nourrisseurBadge = nourrisseurBadge; }
+
+    private String nom;
+    private String espece;
+    private String genre;
+    private String enclos;
+
+    // Constructeur pour initialiser un nouvel animal
+    public Animal(String nom, String espece, String genre, String enclos) {
+        this.nom = nom;
+        this.espece = espece;
+        this.genre = genre;
+        this.enclos = enclos;
+    }
+
+    // Permettent d'accéder aux valeurs des propriétés de l'objet Animal
+    public String getNom() { return nom; }  // Retourne la valeur de la propriété 'nom'
+    public String getEspece() { return espece; } // Retourne la valeur de la propriété 'espece'
+    public String getGenre() { return genre; } // Retourne la valeur de la propriété 'genre'
+    public String getEnclos() { return enclos; } // Retourne la valeur de la propriété 'enclos'
+
+    // Setters
+    public void setNom(String nom) { this.nom = nom; } // Modifie la valeur de la propriété 'nom'
+    public void setEspece(String espece) { this.espece = espece; } // Modifie la valeur de la propriété 'espece'
+    public void setGenre(String genre) { this.genre = genre; }// Modifie la valeur de la propriété 'genre'
+    public void setEnclos(String enclos) { this.enclos = enclos; } // Modifie la valeur de la propriété 'enclos'
+
+    //     // Méthode toString() pour afficher les informations de l'animal
+    public String toString() {
+        return "Animal [nom=" + nom + ", espece=" + espece + ", genre=" + genre + ", enclos=" + enclos + "]";
+    }
+}
+
+// Classe représentant un employé du zoo
+class Employe {
+    // Propriétés de l'employé
+    private int badge;
+    private String nom;
+
+    // Constructeur pour initialiser un nouvel employé
+    public Employe(int badge, String nom) {
+        this.badge = badge;
+        this.nom = nom;
+    }
+
+    //     // Getters et Setters pour les propriétés de l'employé
+    public int getBadge() { return badge; }// Retourne la valeur de la propriété 'badge'
+    public String getNom() { return nom; } // Retourne la valeur de la propriété 'nom'
+
+    // Setters
+    public void setBadge(int badge) { this.badge = badge; } // Modifie la valeur de la propriété 'badge'
+    public void setNom(String nom) { this.nom = nom; } // Modifie la valeur de la propriété 'nom'
+
+   // Méthode toString() pour afficher les informations de l'employé
+    public String toString() {
+        return "Employe [badge=" + badge + ", nom=" + nom + "]";
+    }
+}
+
+// Classe Nourrisseur (hérite de Employe)
+class Nourrisseur extends Employe {
+    // Propriété supplémentaire pour la zone responsable
+    private String zoneResponsable;
+
+    // Constructeur pour initialiser un nouveau nourrisseur
+    public Nourrisseur(int badge, String nom, String zoneResponsable) {
+        super(badge, nom);
+        this.zoneResponsable = zoneResponsable;
+    }
+
+   // Getter et Setter pour la zone responsable
+    public String getZoneResponsable() { return zoneResponsable; } // Retourne la valeur de la propriété 'zoneResponsable'
+
+    // Setter
+    public void setZoneResponsable(String zoneResponsable) { this.zoneResponsable = zoneResponsable; }  // Modifie la valeur de la propriété 'zoneResponsable'
+
+    // Méthode toString() pour afficher les informations du nourrisseur
+    public String toString() {
+        return "Nourrisseur [zoneResponsable=" + zoneResponsable + ", badge=" + getBadge() + ", nom=" + getNom() + "]";
+    }
+}
+
+// Classe représentant un élément de l'inventaire du zoo
+class Inventaire {
+    // Propriétés de l'élément de l'inventaire
+    private String aliment;
+    private int quantite;
+
+    // Constructeur pour initialiser un nouvel élément d'inventaire
+    public Inventaire(String aliment, int quantite) {
+        this.aliment = aliment;
+        this.quantite = quantite;
+    }
+
+    // Getters et Setters pour les propriétés de l'élément d'inventaire
+    public String getAliment() { return aliment; } // Retourne la valeur de la propriété 'aliment'
+    public int getQuantite() { return quantite; } // Retourne la valeur de la propriété 'quantité'
+
+    // Setters
+    public void setAliment(String aliment) { this.aliment = aliment; }  // Modifie la valeur de la propriété 'aliment'
+
+    public void setQuantite(int quantite) { this.quantite = quantite; }  // Modifie la valeur de la propriété 'quantité'
+
+    // Méthode toString() pour afficher les informations de l'élément d'inventaire
+    public String toString() {
+        return "Inventaire [aliment=" + aliment + ", quantite=" + quantite + "]";
+    }
+}
+
+// Classe principale ZooDeGaspe
+public class ZooDeGaspe {
+    public static void main(String[] args) {
+        // Initialisation des listes et du scanner
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Animal> animaux = new ArrayList<>();
+        ArrayList<Nourrisseur> nourrisseurs = new ArrayList<>();
+        ArrayList<Inventaire> inventaire = new ArrayList<>();
+
+        int choix;
+        do {
+            // Affichage du menu
+            System.out.println("1. Ajouter un animal");
+            System.out.println("2. Afficher tous les animaux de chaque enclos");
+            System.out.println("3. Ajouter un nourrisseur");
+            System.out.println("4. Afficher les animaux dont un nourrisseur est responsable");
+            System.out.println("5. Ajouter des aliments dans l'inventaire");
+            System.out.println("6. Quitter");
+            System.out.println("7. Assigner un nourrisseur à un animal ou un groupe d'animaux");
+            System.out.print("Entrez votre choix: ");
+            choix = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choix) {
+                case 1:
+                    // Ajouter un animal
+                    System.out.print("Nom: ");
+                    String nom = scanner.nextLine();
+                    System.out.print("Espèce: ");
+                    String espece = scanner.nextLine();
+                    System.out.print("Genre: ");
+                    String genre = scanner.nextLine();
+                    System.out.print("Enclos: ");
+                    String enclos = scanner.nextLine();
+                    animaux.add(new Animal(nom, espece, genre, enclos));
+                    break;
+                case 2:
+                    // Afficher tous les animaux de chaque enclos
+                    for (Animal animal : animaux) {
+                        System.out.println(animal);
+                    }
+                    break;
+                case 3:
+                    // Ajouter un nourrisseur
+                    System.out.print("Badge: ");
+                    int badge = scanner.nextInt();
+                    scanner.nextLine(); // Consommer la ligne restante
+                    System.out.print("Nom: ");
+                    String nomNourrisseur = scanner.nextLine();
+                    System.out.print("Zone responsable: ");
+                    String zoneResponsable = scanner.nextLine();
+                    nourrisseurs.add(new Nourrisseur(badge, nomNourrisseur, zoneResponsable));
+                    break;
+                case 4:
+                    // Afficher les animaux dont un nourrisseur est responsable
+                    System.out.print("Entrez le badge du nourrisseur: ");
+                    int badgeRecherche = scanner.nextInt();
+                    for (Nourrisseur nourrisseur : nourrisseurs) {
+                        if (nourrisseur.getBadge() == badgeRecherche) {
+                            for (Animal animal : animaux) {
+                                if (animal.getEnclos().startsWith(nourrisseur.getZoneResponsable())) {
+                                    System.out.println(animal);
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case 5:
+                    // Ajouter des aliments dans l'inventaire
+                    System.out.print("Aliment: ");
+                    String aliment = scanner.nextLine();
+                    System.out.print("Quantité: ");
+                    int quantite = scanner.nextInt();
+                    inventaire.add(new Inventaire(aliment, quantite));
+                    break;
+                case 6:
+                    System.out.println("Au revoir !");
+                    break;
+                case 7:
+                    // Assigner un nourrisseur à un animal ou un groupe d'animaux
+                    System.out.print("Entrez le badge du nourrisseur: ");
+                    int badgeAssign = scanner.nextInt();
+                    scanner.nextLine();
+                    if (!nourrisseurExiste(nourrisseurs, badgeAssign)) {
+                        System.out.println("Nourrisseur non trouvé.");
+                        break;
+                    }
+                    System.out.println("1. Assigner à un animal spécifique");
+                    System.out.println("2. Assigner à un groupe d'animaux par espèce");
+                    System.out.print("Choisissez une option: ");
+                    int assignOption = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (assignOption) {
+                        case 1:
+                            System.out.print("Entrez le nom de l'animal: ");
+                            String animalNom = scanner.nextLine();
+                            if (!animalExiste(animaux, animalNom)) {
+                                System.out.println("Animal non trouvé.");
+                                break;
+                            }
+                            for (Animal animal : animaux) {
+                                if (animal.getNom().equalsIgnoreCase(animalNom)) {
+                                    animal.setNourrisseurBadge(badgeAssign);
+                                }
+                            }
+                            System.out.println("Nourrisseur assigné à l'animal.");
+                            break;
+                        case 2:
+                            System.out.print("Entrez l'espèce des animaux: ");
+                            String groupeEspece = scanner.nextLine();
+                            boolean groupeAssign = false;
+                            for (Animal animal : animaux) {
+                                if (animal.getEspece().equalsIgnoreCase(groupeEspece)) {
+                                    animal.setNourrisseurBadge(badgeAssign);
+                                    groupeAssign = true;
+                                }
+                            }
+                            if (groupeAssign) {
+                                System.out.println("Nourrisseur assigné au groupe d'animaux.");
+                            } else {
+                                System.out.println("Aucun animal de cette espèce trouvé.");
+                            }
+                            break;
+                        default:
+                            System.out.println("Choix invalide. Veuillez réessayer.");
+                    }
+                    break;
+
+                default:
+                    System.out.println("Choix invalide. Veuillez réessayer.");
+            }
+        }while (choix != 6);
+
+        scanner.close();
+}
+    public static boolean animalExiste(ArrayList<Animal> animaux, String nom) {
+        for (Animal animal : animaux) {
+            if (animal.getNom().equalsIgnoreCase(nom)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean nourrisseurExiste(ArrayList<Nourrisseur> nourrisseurs, int badge) {
+        for (Nourrisseur nourrisseur : nourrisseurs) {
+            if (nourrisseur.getBadge() == badge) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+}
+
+
+
